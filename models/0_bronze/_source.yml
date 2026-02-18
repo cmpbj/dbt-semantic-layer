@@ -7,5 +7,6 @@ sources:
     schema: raw_manual_input
     tables:
       - name: assets
+        description: "Raw asset records from the manual input dataset."
       - name: ratings
         description: "Raw ratings data from the manual input dataset."

@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: stg_assets
+    description: "Staging model for raw asset records with explicit type casting."
+    columns:
+      - name: created_at
+        description: "Timestamp of the asset creation."
+      - name: asset_id
+        description: "Unique asset ID (UUID)."
+        tests:
+          - not_null
+          - unique
+      - name: collection_status
+        description: "Status of the asset (for example, Settled or Canceled)."
+      - name: face_value
+        description: "Receivable face value in BRL."
+      - name: settled_at
+        description: "Timestamp when the money was actually repaid."
+      - name: due_date
+        description: "Date when repayment is expected."
+      - name: buyer_tax_id
+        description: "CNPJ of the buyer."
+      - name: seller_name
+        description: "Name of the seller."
+      - name: buyer_state
+        description: "Buyer state code (for example, SP, MT, CE)."
+  - name: stg_ratings
+    description: "Staging model for buyer ratings with explicit type casting."
+    columns:
+      - name: created_at
+        description: "Timestamp of the rating creation."
+      - name: tax_id
+        description: "CNPJ of the buyer."
+      - name: rating
+        description: "Point-in-time credit rating."
