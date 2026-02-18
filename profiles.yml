@@ -1,0 +1,10 @@
+dbt_semantic_layer:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: dummy
+      dataset: dummy
+      location: dummy
+      threads: 4

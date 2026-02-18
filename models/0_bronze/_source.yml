@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw manually maintained input data loaded from BigQuery."
+    database: dbt-learning-423822
+    schema: raw_manual_input
+    tables:
+      - name: assets
+      - name: ratings
+        description: "Raw ratings data from the manual input dataset."

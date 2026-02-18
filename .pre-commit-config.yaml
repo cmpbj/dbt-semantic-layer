@@ -1,0 +1,24 @@
+files: ^models/
+
+repos:
+  - repo: https://github.com/dbt-checkpoint/dbt-checkpoint
+    rev: v2.0.5
+    hooks:
+    # General checks
+    - id: dbt-deps
+    - id: dbt-parse
+    - id: check-model-has-description
+      name: Ensure every model has a description in its yaml file.
+    - id: check-source-table-has-description
+      name: Ensure every source has a description on the yaml file.
+    - id: check-script-has-no-table-name
+      name: Ensures that the script is using only source or ref macro to specify the table name.
+    - id: check-model-has-tests
+      name: Ensure every model has at least 2 data-tests configured.
+      args: ["--test-cnt", "2", "--"]
+
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        args: [-c=.yamllint]

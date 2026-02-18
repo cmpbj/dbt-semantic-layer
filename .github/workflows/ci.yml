@@ -1,0 +1,36 @@
+name: CI_job
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  checks_before_build:
+    name: pre-build-checks
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch main branch history
+        run: git fetch origin main:refs/remotes/origin/main
+
+      - name: Install Python Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install dbt dependencies
+        run: dbt deps
+
+      - name: Debug dbt connection
+        run: dbt debug
+
+      - name: Compile dbt models
+        run: dbt parse
+
+      - name: Run Pre-commit checks
+        run: pre-commit run --from-ref origin/main --to-ref HEAD --all-files

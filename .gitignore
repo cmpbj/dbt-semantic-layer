@@ -3,3 +3,8 @@
 target/
 dbt_packages/
 logs/
+dbt
+dbt_0.40.14_linux_amd64.tar.gz
+venv/
+.env
+.python-version
