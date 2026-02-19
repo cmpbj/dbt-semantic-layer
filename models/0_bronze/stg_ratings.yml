@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_ratings
+    description: "Staging model for buyer ratings with explicit type casting."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - created_at
+            - tax_id
+          config:
+            severity: warn
+    columns:
+      - name: created_at
+        description: "Timestamp of the rating creation."
+      - name: tax_id
+        description: "CNPJ of the buyer."
+        data_tests:
+          - not_null
+      - name: rating
+        description: "Point-in-time credit rating."

@@ -38,5 +38,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   dbt_semantic_layer:
     # Applies to all files under models/example/
-    example:
+    0_bronze:
       +materialized: table
+      +schema: bronze
+    1_silver:
+      +materialized: table
+      +schema: silver
+    2_gold:
+      +materialized: table
+      +schema: gold

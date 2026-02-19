@@ -1,0 +1,78 @@
+# SQLFluff config (no dbt templater, no DB connection)
+# Dialect: BigQuery
+# Templater: Jinja only
+
+[sqlfluff]
+dialect = bigquery
+templater = jinja
+
+# Enable all rules, but exclude the ones you don't want.
+rules = all
+exclude_rules = L034, ST06, structure.column_order
+
+# Output formatting
+output_line_length = 80
+max_line_length = 150
+
+# Optional: ignore these directories (edit to match your repo)
+# exclude_paths = target/, dbt_packages/, logs/, .venv/
+
+[sqlfluff:templater:jinja]
+apply_dbt_builtins = True
+
+# -------------------------
+# Indentation configuration
+# -------------------------
+[sqlfluff:indentation]
+indent_unit = space
+tab_space_size = 4
+indented_joins = False
+indented_ctes = True
+indented_using_on = True
+indented_on_contents = False
+indented_then = True
+indented_then_contents = True
+allow_implicit_indents = False
+template_blocks_indent = False
+skip_indentation_in = script_content
+trailing_comments = before
+ignore_comment_lines = False
+
+# -------------------------
+# Capitalisation rules
+# -------------------------
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = lower
+
+# -------------------------
+# Comma layout rules
+# -------------------------
+[sqlfluff:layout:type:comma]
+spacing_before = touch
+line_position = leading
+
+# -------------------------
+# Long line handling
+# -------------------------
+[sqlfluff:rules:layout.long_lines]
+ignore_comment_lines = True
+ignore_comment_clauses = False
+
+# -------------------------
+# Aliasing rules
+# -------------------------
+[sqlfluff:rules:aliasing.table]
+aliasing = explicit
+
+[sqlfluff:rules:aliasing.column]
+aliasing = explicit
+
+[sqlfluff:rules:aliasing.length]
+min_alias_length = 3
+max_alias_length = None
+
+# -------------------------
+# Reference consistency
+# -------------------------
+[sqlfluff:rules:references.consistent]
+enforce_consistency = True

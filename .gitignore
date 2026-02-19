@@ -8,3 +8,4 @@ dbt_0.40.14_linux_amd64.tar.gz
 venv/
 .env
 .python-version
+package-lock.yml

@@ -26,9 +26,6 @@ jobs:
       - name: Install dbt dependencies
         run: dbt deps
 
-      - name: Debug dbt connection
-        run: dbt debug
-
       - name: Compile dbt models
         run: dbt parse
 
