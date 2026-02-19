@@ -6,11 +6,6 @@ models:
     columns:
       - name: created_at
         description: "Timestamp of the asset creation."
-      - name: asset_id
-        description: "Unique asset ID (UUID)."
-        tests:
-          - not_null
-          - unique
       - name: collection_status
         description: "Status of the asset (for example, Settled or Canceled)."
       - name: face_value
@@ -27,10 +22,18 @@ models:
         description: "Buyer state code (for example, SP, MT, CE)."
   - name: stg_ratings
     description: "Staging model for buyer ratings with explicit type casting."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - created_at
+            - tax_id
     columns:
       - name: created_at
         description: "Timestamp of the rating creation."
       - name: tax_id
         description: "CNPJ of the buyer."
+        tests:
+          - unique
+          - not_null
       - name: rating
         description: "Point-in-time credit rating."
