@@ -3,11 +3,24 @@ version: 2
 models:
   - name: stg_assets
     description: "Staging model for raw asset records with explicit type casting."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - created_at
+            - seller_name
+            - buyer_tax_id
+            - buyer_state
+          config:
+            severity: warn
     columns:
       - name: created_at
         description: "Timestamp of the asset creation."
       - name: collection_status
         description: "Status of the asset (for example, Settled or Canceled)."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Settled', 'Open', 'Repaid', 'ProcessingPayment', 'Default', 'Canceled']
       - name: face_value
         description: "Receivable face value in BRL."
       - name: settled_at
@@ -20,20 +33,3 @@ models:
         description: "Name of the seller."
       - name: buyer_state
         description: "Buyer state code (for example, SP, MT, CE)."
-  - name: stg_ratings
-    description: "Staging model for buyer ratings with explicit type casting."
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - created_at
-            - tax_id
-    columns:
-      - name: created_at
-        description: "Timestamp of the rating creation."
-      - name: tax_id
-        description: "CNPJ of the buyer."
-        tests:
-          - unique
-          - not_null
-      - name: rating
-        description: "Point-in-time credit rating."
