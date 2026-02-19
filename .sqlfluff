@@ -6,7 +6,10 @@ dialect = bigquery
 
 # Specifies the templater to use (e.g., dbt, jinja, python). 'dbt' integrates with dbt projects.
 # One of [raw|jinja|python|placeholder]
-templater = raw
+templater = jinja
+
+[sqlfluff:templater:jinja]
+apply_dbt_builtins = True
 
 # Defines the set of rules to enable. 'all' enables all available rules by default.
 # Specific rules can be listed comma-separated (e.g., L001, L010).
