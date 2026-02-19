@@ -18,7 +18,7 @@ rules = all
 # Specifies rules to disable, overriding the 'rules' setting.
 # L034 (structure.column_order) enforces a specific order for select clause elements (wildcards first, then simple columns, then complex expressions).
 # Excluding it means this specific ordering is NOT enforced.
-exclude_rules = L034
+exclude_rules = L034,ST06
 
 # Below controls SQLFluff output, see max_line_length for SQL output
 output_line_length = 80
