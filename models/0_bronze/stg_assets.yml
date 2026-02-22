@@ -5,31 +5,54 @@ models:
     description: "Staging model for raw asset records with explicit type casting."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - created_at
-            - seller_name
-            - buyer_tax_id
-            - buyer_state
-          config:
-            severity: warn
+          arguments:
+            combination_of_columns:
+              - asset_id
+              - as_of_date
     columns:
-      - name: created_at
+      - name: asset_id
+        description: "Unique identifier for the asset."
+        data_tests:
+          - not_null
+      - name: asset_created_timestamp
         description: "Timestamp of the asset creation."
       - name: collection_status
-        description: "Status of the asset (for example, Settled or Canceled)."
+        description: "Current collection status of the asset."
         data_tests:
           - accepted_values:
               arguments:
                 values: ['Settled', 'Open', 'Repaid', 'ProcessingPayment', 'Default', 'Canceled']
-      - name: face_value
-        description: "Receivable face value in BRL."
-      - name: settled_at
-        description: "Timestamp when the money was actually repaid."
-      - name: due_date
-        description: "Date when repayment is expected."
+      - name: asset_status
+        description: "Operational lifecycle status of the asset."
+      - name: face_value_amount_brl_original
+        description: "Original asset face value in BRL."
+      - name: face_value_amount_brl_outstanding
+        description: "Outstanding (open) face value in BRL."
+      - name: due_date_latest
+        description: "Latest due date for settlement."
+      - name: settled_timestamp
+        description: "Timestamp when settlement happened."
       - name: buyer_tax_id
         description: "CNPJ of the buyer."
-      - name: seller_name
-        description: "Name of the seller."
+        data_tests:
+          - not_null
+      - name: buyer_root_tax_id
+        description: "Root CNPJ of the buyer."
       - name: buyer_state
-        description: "Buyer state code (for example, SP, MT, CE)."
+        description: "Buyer state."
+      - name: buyer_city
+        description: "Buyer city."
+      - name: seller_name
+        description: "Seller name."
+      - name: channel_name
+        description: "Commercial channel name."
+      - name: product_channel
+        description: "Product channel."
+      - name: collected_amount_brl
+        description: "Collected amount in BRL."
+      - name: matured_amount_brl
+        description: "Matured amount in BRL."
+      - name: as_of_date
+        description: "Snapshot date for the asset record."
+        data_tests:
+          - not_null

@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: agg_cost_of_risk_daily
+    description: "Daily mart aggregating cost of risk by state, status, and rating."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - as_of_date
+              - buyer_state
+              - economic_status
+              - buyer_rating
+    columns:
+      - name: as_of_date
+        description: "Snapshot date."
+        data_tests:
+          - not_null
+      - name: cost_of_risk_amount_brl
+        description: "Total expected loss amount in BRL."
+      - name: outstanding_face_value_amount_brl
+        description: "Total face value at risk in BRL."
+      - name: implied_cost_of_risk_rate
+        description: "Ratio between expected loss and face value at risk."

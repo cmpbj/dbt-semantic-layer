@@ -1,0 +1,26 @@
+version: 2
+
+metrics:
+  - name: total_assets
+    description: "Total number of assets."
+    label: "Total Assets"
+    type: simple
+    type_params:
+      measure:
+        name: assets_count
+
+  - name: total_outstanding_face_value_amount_brl
+    description: "Total face value considered in cost-of-risk calculations."
+    label: "Total Outstanding Face Value (BRL)"
+    type: simple
+    type_params:
+      measure:
+        name: outstanding_face_value_amount_brl
+
+  - name: total_cost_of_risk_amount_brl
+    description: "Total expected loss amount in BRL."
+    label: "Total Cost of Risk (BRL)"
+    type: simple
+    type_params:
+      measure:
+        name: cost_of_risk_amount_brl

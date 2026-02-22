@@ -1,0 +1,39 @@
+version: 2
+
+semantic_models:
+  - name: cost_of_risk
+    description: "Semantic model for expected loss and provision analysis."
+    model: ref('fct_cost_of_risk')
+    defaults:
+      agg_time_dimension: as_of_date
+    entities:
+      - name: asset
+        type: primary
+        expr: asset_id
+      - name: buyer
+        type: foreign
+        expr: buyer_tax_id
+    dimensions:
+      - name: as_of_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: buyer_state
+        type: categorical
+      - name: economic_status
+        type: categorical
+      - name: buyer_rating
+        type: categorical
+    measures:
+      - name: assets_count
+        description: "Number of assets in the snapshot."
+        agg: count_distinct
+        expr: asset_id
+      - name: outstanding_face_value_amount_brl
+        description: "Total face value at risk."
+        agg: sum
+        expr: face_value_at_risk_amount_brl
+      - name: cost_of_risk_amount_brl
+        description: "Total expected loss amount."
+        agg: sum
+        expr: cost_of_risk_amount_brl

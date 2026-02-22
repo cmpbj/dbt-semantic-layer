@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: silver_asset_portfolio_snapshot
+    description: "Portfolio snapshot with normalized economic status at asset grain."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - asset_id
+              - as_of_date
+    columns:
+      - name: asset_id
+        description: "Asset identifier."
+        data_tests:
+          - not_null
+      - name: as_of_date
+        description: "Snapshot date."
+        data_tests:
+          - not_null
+      - name: economic_status
+        description: "Economic status used for risk provisioning."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Settled', 'Defaulted', 'Active']
+      - name: face_value_at_risk_amount_brl
+        description: "Face value considered for cost of risk in BRL."
+        data_tests:
+          - not_null

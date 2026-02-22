@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: silver_asset_rating_asof
+    description: "Asset snapshot enriched with the latest available buyer rating on or before as_of_date."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - asset_id
+              - as_of_date
+    columns:
+      - name: asset_id
+        description: "Asset identifier."
+        data_tests:
+          - not_null
+      - name: buyer_rating
+        description: "Buyer rating used for provisioning at as_of_date."
+        data_tests:
+          - not_null
+      - name: rating_snapshot_date
+        description: "Snapshot date from the selected buyer rating."

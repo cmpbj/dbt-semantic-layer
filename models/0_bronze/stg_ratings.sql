@@ -6,9 +6,11 @@ with
 
     , typed as (
         select
-            safe_cast(created_at as timestamp) as created_at
-            , cast(tax_id as string) as tax_id
-            , cast(rating as string) as rating
+            cast(buyer_root_tax_id as string) as buyer_root_tax_id
+            , cast(buyer_tax_id as string) as buyer_tax_id
+            , cast(buyer_name as string) as buyer_name
+            , upper(cast(credit_rating_latest as string)) as rating
+            , safe_cast(snapshot_date as date) as snapshot_date
         from source_data
     )
 
