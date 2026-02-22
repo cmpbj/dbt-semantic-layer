@@ -1,10 +1,10 @@
 with
     date_spine as (
         {{
-            dbt.date_spine( --noqa
-                datepart = "day",
-                start_date = "cast('2020-01-01' as date)",
-                end_date = "cast('2035-12-31' as date)"
+            dbt.date_spine(
+                "day",
+                "cast('2020-01-01' as date)",
+                "cast('2035-12-31' as date)"
             )
         }}
     )
