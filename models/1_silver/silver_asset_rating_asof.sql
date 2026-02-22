@@ -40,7 +40,7 @@ with
         from assets as ass
         left join ratings as rat
             on ass.buyer_tax_id = rat.buyer_tax_id
-            and rat.snapshot_date <= ass.as_of_date
+            and ass.as_of_date >= rat.snapshot_date
     )
 
 select

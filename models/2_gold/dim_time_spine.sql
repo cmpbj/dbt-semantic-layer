@@ -1,7 +1,7 @@
 with
     date_spine as (
         {{
-            dbt_utils.date_spine(
+            dbt.date_spine(
                 datepart = "day",
                 start_date = "cast('2020-01-01' as date)",
                 end_date = "cast('2035-12-31' as date)"

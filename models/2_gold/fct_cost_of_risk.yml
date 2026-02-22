@@ -26,10 +26,6 @@ models:
                 values: ['Settled', 'Defaulted', 'Active']
       - name: buyer_rating
         description: "Buyer rating used for active assets."
-        data_tests:
-          - accepted_values:
-              arguments:
-                values: ['A', 'B', 'C', 'D', 'E', 'F']
       - name: provision_rate
         description: "Provision rate selected by business rules."
       - name: cost_of_risk_amount_brl

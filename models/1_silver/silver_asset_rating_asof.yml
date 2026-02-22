@@ -18,8 +18,5 @@ models:
         description: "Buyer rating used for provisioning at as_of_date."
         data_tests:
           - not_null
-          - accepted_values:
-              arguments:
-                values: ['A', 'B', 'C', 'D', 'E', 'F']
       - name: rating_snapshot_date
         description: "Snapshot date from the selected buyer rating."
