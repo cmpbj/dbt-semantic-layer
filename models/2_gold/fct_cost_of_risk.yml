@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: fct_cost_of_risk
+    description: "Asset-grain fact table with provision rates and cost of risk amounts."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - asset_id
+              - as_of_date
+    columns:
+      - name: asset_id
+        description: "Asset identifier."
+        data_tests:
+          - not_null
+      - name: as_of_date
+        description: "Snapshot date."
+        data_tests:
+          - not_null
+      - name: economic_status
+        description: "Economic status used by the provisioning policy."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Settled', 'Defaulted', 'Active']
+      - name: buyer_rating
+        description: "Buyer rating used for active assets."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['A', 'B', 'C', 'D', 'E', 'F']
+      - name: provision_rate
+        description: "Provision rate selected by business rules."
+      - name: cost_of_risk_amount_brl
+        description: "Expected loss amount in BRL."
